@@ -1,14 +1,13 @@
 :root {
   --main-bg-color: #242829;
-  --main-font-color: #9d2a8f;
-  --board-color: #9d2a8f;
+  --main-font-color: rgb(200, 195, 188);
+  --board-color: #275355;
   --board-outline-color: #9d2a8f;
   --main-font: 'Roboto', sans-serif;
 }
 
-
 body {
-  color: #9d2a8f;
+  color: var(--main-font-color);
   background-color: var(--main-bg-color);
   display: flex;
   justify-content: center;
@@ -22,24 +21,66 @@ body {
   align-items: center;
 }
 
+
+
 .board {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: var(--board-color);
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   gap: 10px;
   justify-content: center;
   align-items: center;
-  width: 330px;
-  height: 330px;
+  width: auto;
+  height: auto;
+  margin-bottom: 3em;
 }
 
 .cell {
-  background-color: var(--board-color);
-  border: 2px solid var(--board-outline-color);
+  background-color: var(--main-bg-color);
   width: 100%;
   height: 100%;
   font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80%;
+  height: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+line {
+  stroke-dasharray: 456;
+  stroke-dashoffset: 456;
+  animation: draw-x 1s ease forwards;
+}
+
+line:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes draw-x {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+circle {
+  stroke-dasharray: 590;
+  stroke-dashoffset: 590;
+  animation: drawCircle 1s ease forwards;
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

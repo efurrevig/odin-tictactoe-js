@@ -36,15 +36,15 @@ Board.prototype.checkWin = function(row, col) {
 }
 
 Board.prototype.changeBoard = function(row, col, player) {
+    console.log('hi')
     let n = this.rows.length;
     let toAdd = player === game.playerOne ? 1 : -1;
-    console.log(toAdd)
     this.rows[row] += toAdd;
     this.cols[col] += toAdd;
     if (row === col) {
         this.diag += toAdd;
     }
-    if (row + col === n - 1) {
+    if (parseInt(row) + parseInt(col) === n - 1) {
         this.antidiag += toAdd;
     }
 }
@@ -67,14 +67,15 @@ function makeMove(event) {
     let col = square.dataset.col
     game.board.changeBoard(row, col, game.currentPlayer);
     if (game.currentPlayer === game.playerOne) {
-        square.style.backgroundColor = 'red';
+        square.innerHTML = xDiv;
     } else {
-        square.style.backgroundColor = 'blue';
+        square.innerHTML = oDiv;
     }
     if (game.board.checkWin(row, col)) {
         game.currentPlayer.incrementScore();
         console.log(game.currentPlayer.name + ' wins!');
     }
+    square.removeEventListener('click', makeMove);
     game.currentPlayer = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
 }
 
@@ -87,7 +88,21 @@ function boardSetup() {
     }
 }
 
-
+const xDiv = `<div class="mark">
+                <svg viewBox="140 0 325 400" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                    <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+                    <line fill="none" id="svg_6" stroke="#aaffff" stroke-linecap="round" 
+                    stroke-width="10" style="--darkreader-inline-stroke:#007f7f;" x1="397" x2="208" y1="107" y2="297" />
+                    <line fill="none" id="svg_7" stroke="#aaffff" stroke-linecap="round" 
+                    stroke-width="10" style="--darkreader-inline-stroke:#007f7f;" transform="matrix(1 0 0 1 0 0)" x1="207" x2="394" y1="107" y2="294"/>
+                </svg>
+                </div>`
+const oDiv = `<div class="mark">
+                <svg viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="50%" fill="none" id="svg_2" r="93.61" 
+                    stroke="#d4ffaa" stroke-linecap="round" stroke-width="10" style="--darkreader-inline-stroke:#c7ff90;"/>
+                </svg>
+                </div>`
 let game = new Game();
 let playerForm = document.getElementById('playerForm');
 playerForm.addEventListener('submit', startGame);
