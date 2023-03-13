@@ -31,6 +31,10 @@ function Board() {
 Board.prototype.checkWin = function(row, col) {
     let n = this.rows.length;
     if (Math.abs(this.rows[row]) === n || Math.abs(this.cols[col]) === n || Math.abs(this.diag) === n || Math.abs(this.antidiag) === n) {
+        for (let i = 0; i < 9; i++) {
+            let square = document.getElementById(i.toString())
+            square.removeEventListener('click', makeMove);
+        }
         return true;
     }
 }
