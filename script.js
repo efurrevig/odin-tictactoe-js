@@ -51,13 +51,14 @@ Board.prototype.changeBoard = function(row, col, player) {
 
 function startGame(event) {
     event.preventDefault();
-    let playerOneName = document.getElementById('playerOne').value;
-    let playerTwoName = document.getElementById('playerTwo').value;
-    let playerOne = new Player(playerOneName);
-    let playerTwo = new Player(playerTwoName);
+    console.log('hi')
+    let playerOne = new Player('Player One');
+    let playerTwo = new Player('Player Two');
     game.playerOne = playerOne;
     game.playerTwo = playerTwo;
     game.currentPlayer = playerOne;
+    p1Circle.classList.add('fill')
+    p2Circle.classList.remove('fill')
     boardSetup()
 } 
 
@@ -77,9 +78,13 @@ function makeMove(event) {
     }
     square.removeEventListener('click', makeMove);
     game.currentPlayer = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+    toggleTurnDisplay();
 }
 
-
+function toggleTurnDisplay() {
+    p1Circle.classList.toggle('fill')
+    p2Circle.classList.toggle('fill')
+}
 function boardSetup() {
     for (let i = 0; i < 9; i++) {
         let square = document.getElementById(i.toString())
@@ -103,6 +108,10 @@ const oDiv = `<div class="mark">
                     stroke="#d4ffaa" stroke-linecap="round" stroke-width="10" style="--darkreader-inline-stroke:#c7ff90;"/>
                 </svg>
                 </div>`
+
+const p1Circle = document.querySelector('.p1 .circle');
+const p2Circle = document.querySelector('.p2 .circle');
+
 let game = new Game();
-let playerForm = document.getElementById('playerForm');
-playerForm.addEventListener('submit', startGame);
+let play = document.getElementById('play-button');
+play.addEventListener('click', startGame);

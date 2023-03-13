@@ -22,18 +22,19 @@
             <div class="cell" data-row="2" data-col="1" id="7"></div>
             <div class="cell" data-row="2" data-col="2" id="8"></div>
         </div>
-
-        <div class="button-container">
-            <form id="playerForm">
-                <label for="playerOne">Player One(X):</label>
-                <input type="text" id="playerOne" name="playerOne" required>
-          
-                <label for="playerTwo">Player Two(O)</label>
-                <input type="text" id="playerTwo" name="playerTwo" required>
-          
-                <input type="submit" value="Play">
-            </form>
+        
+        <div class="playerDisplay">
+            <div class="p1"> 
+                <p>Player One(X):</p>
+                <div class="circle"></div>
+            </div>
+            <div class="p2">
+                <p>Player Two(O):</p>
+                <div class="circle"></div>
+            </div>
         </div>
+        
+        <button type="button" class="play-button" id="play-button">Play</button>
     </div>
 </body>
 </html>
